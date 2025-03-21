@@ -1,0 +1,13 @@
+.nested-fields
+  .fields
+    .field
+      = f.label :product_id, "Product"
+      = f.collection_select :product_id, Product.all, :id, :id, {}, class: "select2"
+    .field
+      = f.label :quantity
+      = f.number_field :quantity, min: 1
+    .field
+      = f.label :discount_percent
+      = f.number_field :discount_percent, min: 0, max: 100, step: 0.01
+    .field
+      = link_to "Remove", "#", class: "button", data: { action: "line-items#remove" } 

@@ -1,0 +1,2 @@
+class IceCreamSerializer < ProductSerializer
+end
