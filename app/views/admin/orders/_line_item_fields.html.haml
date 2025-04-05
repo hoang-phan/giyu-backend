@@ -1,13 +1,8 @@
-.nested-fields
-  .fields
-    .field
-      = f.label :product_id, "Product"
-      = f.collection_select :product_id, Product.all, :id, :id, {}, class: "select2"
-    .field
-      = f.label :quantity
-      = f.number_field :quantity, min: 1
-    .field
-      = f.label :discount_percent
-      = f.number_field :discount_percent, min: 0, max: 100, step: 0.01
-    .field
-      = link_to "Remove", "#", class: "button", data: { action: "line-items#remove" } 
+%tr.nested-fields
+  %td= f.input :product, as: :select, collection: Product.all, label: false, input_html: { class: 'select2' }
+  %td= f.input :quantity, label: false, input_html: { min: 1 }
+  %td= f.input :discount_percent, label: false, input_html: { min: 0, max: 100, step: 1 }
+  %td
+    = f.input :id, as: :hidden
+    = f.input :_destroy, as: :boolean, label: 'Remove', wrapper_html: { class: 'hidden' }
+    = link_to 'Remove', '#', class: 'remove_nested_fields', data: { action: 'nested-fields#remove' } 

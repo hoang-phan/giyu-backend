@@ -4,6 +4,8 @@ class Order < ApplicationRecord
   has_many :line_items, dependent: :destroy
   accepts_nested_attributes_for :line_items, allow_destroy: true, reject_if: :all_blank
 
+  before_save :calculate_total_amount
+
   aasm column: :status do
     state :ordering, initial: true
     state :waiting_payment
@@ -34,14 +36,16 @@ class Order < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "id", "id_value", "status", "total_amount", "updated_at"]
+    [ "created_at", "id", "id_value", "status", "total_amount", "updated_at" ]
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ["line_items"]
+    [ "line_items" ]
   end
 
+  private
+
   def calculate_total_amount
-    line_items.sum(&:final_price)
+    self.total_amount = line_items.sum(&:amount_with_fallback)
   end
 end

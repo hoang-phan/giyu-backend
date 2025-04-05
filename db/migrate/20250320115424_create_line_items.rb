@@ -5,6 +5,7 @@ class CreateLineItems < ActiveRecord::Migration[8.0]
       t.references :product, null: false, foreign_key: true
       t.integer :quantity
       t.decimal :discount_percent
+      t.integer :amount
 
       t.timestamps
     end

@@ -4,4 +4,4 @@ class FlavorSerializer < ActiveModel::Serializer
   def unit_price
     object.unit_price.to_f
   end
-end 
+end

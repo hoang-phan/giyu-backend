@@ -4,4 +4,4 @@ class ProductSerializer < ActiveModel::Serializer
   def fixed_price
     object.fixed_price.to_f
   end
-end 
+end

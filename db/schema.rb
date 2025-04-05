@@ -64,15 +64,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_20_115448) do
     t.decimal "discount_percent"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "amount"
     t.index ["order_id"], name: "index_line_items_on_order_id"
     t.index ["product_id"], name: "index_line_items_on_product_id"
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "total_amount"
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "total_amount"
     t.index ["status"], name: "index_orders_on_status"
   end
 
@@ -81,6 +82,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_20_115448) do
     t.integer "fixed_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
     t.index ["type"], name: "index_products_on_type"
   end
 

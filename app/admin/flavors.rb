@@ -1,5 +1,5 @@
 ActiveAdmin.register Flavor do
-  menu parent: 'Settings'
+  menu parent: "Settings"
 
   permit_params :name, :unit_price
 
@@ -40,4 +40,4 @@ ActiveAdmin.register Flavor do
     end
     f.actions
   end
-end 
+end

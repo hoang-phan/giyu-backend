@@ -3,10 +3,10 @@ class Product < ApplicationRecord
   alias_attribute :price, :fixed_price
 
   def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "fixed_price", "id", "id_value", "type", "updated_at"]
+    [ "created_at", "fixed_price", "id", "id_value", "type", "updated_at" ]
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ["line_items"]
+    [ "line_items" ]
   end
 end

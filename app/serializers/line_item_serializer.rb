@@ -7,4 +7,4 @@ class LineItemSerializer < ActiveModel::Serializer
   def final_price
     object.final_price || (object.product&.fixed_price.to_f * (1 - (object.discount_percent.to_f / 100)) * object.quantity)
   end
-end 
+end

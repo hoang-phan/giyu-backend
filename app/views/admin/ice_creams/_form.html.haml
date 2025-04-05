@@ -1,0 +1,23 @@
+= semantic_form_for [:admin, @ice_cream], html: { data: { controller: 'nested-fields' } } do |f|
+  = f.semantic_errors(*f.object.errors.attribute_names)
+  
+  = f.inputs do
+    = f.input :name
+    = f.input :fixed_price, input_html: { min: 0, step: 0.01 }
+
+    %table
+      %thead
+        %tr
+          %th Flavor
+          %th Quantity
+          %th
+      %tbody{ data: { nested_fields_target: 'container' } }
+        = f.semantic_fields_for :ice_cream_flavors do |item|
+          = render 'ice_cream_flavor_fields', f: item
+      %tbody.template{ data: { nested_fields_target: "template" } }
+        = render 'ice_cream_flavor_template'
+    = link_to "Add Flavor", "#", class: "add-nested-field", data: { action: "nested-fields#add" }
+
+    = f.actions do
+      = f.action :submit, label: 'Save Ice Cream'
+      = f.action :cancel, label: 'Cancel'

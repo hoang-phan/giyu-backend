@@ -3,4 +3,4 @@ class IceCreamFlavorSerializer < ActiveModel::Serializer
 
   belongs_to :ice_cream
   belongs_to :flavor
-end 
+end

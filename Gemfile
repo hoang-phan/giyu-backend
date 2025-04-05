@@ -8,6 +8,8 @@ gem "puma", ">= 5.0"
 gem "importmap-rails"
 gem "turbo-rails"
 gem "stimulus-rails"
+gem "tailwindcss-rails", "~> 3"
+gem "tailwindcss-ruby", "~> 3"
 gem "jbuilder"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "active_model_serializers"
@@ -21,7 +23,7 @@ gem "solid_cable"
 gem "bootsnap", require: false
 gem "kamal", require: false
 gem "thruster", require: false
-gem "activeadmin", "4.0.0beta14"
+gem "activeadmin", "4.0.0beta15"
 gem "devise"
 gem "cancancan"
 
@@ -34,6 +36,3 @@ end
 group :development do
   gem "web-console"
 end
-
-gem "cssbundling-rails"
-gem "jsbundling-rails"

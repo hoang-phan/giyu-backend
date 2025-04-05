@@ -1,0 +1,14 @@
+%tr.nested-fields
+  %td
+    %li.select.input.required
+      = select_tag "order[line_items_attributes][{INDEX}][product_id]", options_from_collection_for_select(Product.all, :id, :to_s), class: 'select2', include_blank: true
+  %td
+    %li.number.input.optional.numeric.stringish
+      = number_field_tag "order[line_items_attributes][{INDEX}][quantity]", nil, min: 1, step: 1
+  %td
+    %li.number.input.optional.numeric.stringish
+      = number_field_tag "order[line_items_attributes][{INDEX}][discount_percent]", nil, min: 0, max: 100, step: 1
+  %td
+    %li.hidden.input.optional
+      = hidden_field_tag "order[line_items_attributes][{INDEX}][_destroy]", 0
+    = link_to 'Remove', '#', class: 'remove_nested_fields', data: { action: 'nested-fields#remove' }

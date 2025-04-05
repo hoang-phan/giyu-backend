@@ -1,4 +1,5 @@
-import { application } from "@hotwired/stimulus"
-import LineItemsController from "./line_items_controller"
+import { application } from "controllers/application"
 
-application.register("line-items", LineItemsController) 
+// Eager load all controllers defined in the import map under controllers/**/*_controller
+import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
+eagerLoadControllersFrom("controllers", application)

@@ -1,11 +1,11 @@
 class CreateOrders < ActiveRecord::Migration[8.0]
   def change
-    create_table :orders do |t|
+    change_table :orders do |t|
+      # t.string :status
       t.integer :total_amount
-      t.string :status
 
-      t.timestamps
-      t.index :status
+      # t.timestamps
+      # t.index :status
     end
   end
 end

@@ -1,0 +1,10 @@
+= stylesheet_link_tag "active_admin"
+%meta{content: "width=device-width,initial-scale=1", name: "viewport"}
+= csrf_meta_tags
+= csp_meta_tag
+
+= stylesheet_link_tag "active_admin"
+= javascript_importmap_tags "active_admin", importmap: ActiveAdmin.importmap
+= javascript_import_module_tag "application"
+- if content_for?(:head)
+  = yield(:head)

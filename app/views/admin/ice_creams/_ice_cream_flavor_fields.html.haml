@@ -1,0 +1,7 @@
+%tr.nested-fields
+  %td= f.input :flavor, as: :select, collection: Flavor.all, label: false, input_html: { class: 'select2' }
+  %td= f.input :quantity, label: false, input_html: { min: 1 }
+  %td
+    = f.input :id, as: :hidden
+    = f.input :_destroy, as: :boolean, label: 'Remove', wrapper_html: { class: 'hidden' }
+    = link_to 'Remove', '#', class: 'remove_nested_fields', data: { action: 'nested-fields#remove' }

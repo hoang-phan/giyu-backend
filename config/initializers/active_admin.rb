@@ -1,3 +1,15 @@
+ActiveAdmin.importmap.draw do
+  pin "@rails/actioncable", to: "actioncable.esm.js", preload: true
+  pin "@rails/activestorage", to: "activestorage.esm.js", preload: true
+
+  pin "@hotwired/turbo-rails", to: "turbo.js", preload: true
+  pin "@hotwired/stimulus", to: "stimulus.js", preload: true
+  pin "@hotwired/stimulus-loading", to: "stimulus-loading.js", preload: true
+
+  pin "application", preload: true
+  pin_all_from "app/javascript/controllers", under: "controllers"
+end
+
 ActiveAdmin.setup do |config|
   # == Site Title
   #
@@ -7,9 +19,6 @@ ActiveAdmin.setup do |config|
   # to use your own logo, styles, etc.
   #
   config.site_title = "Giyu Backend"
-
-  # Set the link that is used for the site title image.
-  # By default, we show the ActiveAdmin logo.
 
   # == Load Paths
   #
@@ -122,7 +131,8 @@ ActiveAdmin.setup do |config|
   # Set the action to call for the root path. You can set different
   # roots for each namespace.
   #
-  config.root_to = 'dashboard#index'
+  # Default:
+  # config.root_to = 'dashboard#index'
 
   # == Admin Comments
   #
@@ -162,7 +172,7 @@ ActiveAdmin.setup do |config|
   # You can exclude possibly sensitive model attributes from being displayed,
   # added to forms, or exported by default by ActiveAdmin
   #
-  config.filter_attributes = [:encrypted_password, :password, :password_confirmation]
+  config.filter_attributes = [ :encrypted_password, :password, :password_confirmation ]
 
   # == Localize Date/Time Format
   #
@@ -274,24 +284,4 @@ ActiveAdmin.setup do |config|
   # You can inherit it with own class and inject it for all resources
   #
   # config.order_clause = MyOrderClause
-
-  # == CSS
-  #
-  # You can add your own stylesheets to be loaded here.
-  # For example, you can create a new stylesheet file:
-  #   app/assets/stylesheets/active_admin.css
-  #
-  # And then add it to the ActiveAdmin stylesheets:
-  #   config.clear_stylesheets!
-  #   config.register_stylesheet 'active_admin.css'
-
-  # == JS
-  #
-  # You can add your own javascript to be loaded here.
-  # For example, you can create a new javascript file:
-  #   app/assets/javascripts/active_admin.js
-  #
-  # And then add it to the ActiveAdmin javascripts:
-  #   config.clear_javascripts!
-  #   config.register_javascript 'active_admin.js'
 end

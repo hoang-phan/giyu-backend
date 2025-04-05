@@ -1,3 +1,2 @@
-web: env RUBY_DEBUG_OPEN=true bin/rails server
-css: yarn build:css --watch
-js: yarn build --watch
+web: bin/rails server -p 3000
+active_admin: bin/rails active_admin:watch
