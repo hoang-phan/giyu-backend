@@ -19,7 +19,7 @@ namespace :active_admin do
       "--watch",
       "-i", Rails.root.join("app/assets/stylesheets/active_admin.scss").to_s,
       "-o", Rails.root.join("app/assets/builds/active_admin.css").to_s,
-      "-c", Rails.root.join("config/tailwind-active_admin.config.js").to_s,
+      "-c", Rails.root.join("config/tailwind.config.js").to_s,
       "-m"
     ]
 

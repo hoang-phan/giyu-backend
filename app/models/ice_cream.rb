@@ -3,6 +3,8 @@ class IceCream < Product
   has_many :flavors, through: :ice_cream_flavors
   accepts_nested_attributes_for :ice_cream_flavors, allow_destroy: true, reject_if: :all_blank
 
+  validates :fixed_price, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
+
   def self.ransackable_associations(auth_object = nil)
     []
   end

@@ -15,7 +15,7 @@ module Api
       private
 
       def permitted_params
-        params.permit(order: %i[status total_amount])
+        params.permit(order: %i[status])
       end
     end
   end

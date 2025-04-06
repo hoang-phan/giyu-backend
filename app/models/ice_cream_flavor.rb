@@ -2,6 +2,8 @@ class IceCreamFlavor < ApplicationRecord
   belongs_to :ice_cream
   belongs_to :flavor
 
+  validates :quantity, numericality: { greater_than_or_equal_to: 0 }, presence: true
+
   def self.ransackable_attributes(auth_object = nil)
     [ "created_at", "flavor_id", "id", "id_value", "ice_cream_id", "quantity", "updated_at" ]
   end

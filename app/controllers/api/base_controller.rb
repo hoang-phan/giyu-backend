@@ -1,5 +1,6 @@
 class Api::BaseController < InheritedResources::Base
   skip_forgery_protection
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   respond_to :json
 
@@ -21,5 +22,9 @@ class Api::BaseController < InheritedResources::Base
 
   def resource_request_name
     resource_class.name.underscore.to_sym
+  end
+
+  def record_not_found
+    render json: { errors: ['Record not found'] }, status: :not_found
   end
 end
