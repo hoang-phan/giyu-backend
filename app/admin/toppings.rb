@@ -1,4 +1,4 @@
-ActiveAdmin.register Flavor do
+ActiveAdmin.register Topping do
   extend PricedItemManageable
 
   menu parent: "Settings"
