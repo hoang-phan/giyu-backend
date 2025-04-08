@@ -8,7 +8,7 @@ module.exports = {
     `${activeAdminPath}/app/views/**/*.{arb,erb,html,rb}`,
     './app/admin/**/*.{arb,erb,html,rb}',
     './app/views/active_admin/**/*.{arb,erb,html,rb}',
-    './app/views/admin/**/*.{arb,erb,html,rb}',
+    './app/views/admin/**/*.{arb,erb,html,haml,rb}',
     './app/javascript/**/*.js'
   ],
   darkMode: "class",

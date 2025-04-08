@@ -1,0 +1,7 @@
+%tr.nested-fields
+  %td= f.input :topping, as: :select, collection: Topping.all, label: false, input_html: { class: 'select2' }
+  %td= f.input :quantity, input_html: { min: 0, step: 1 }, label: false
+  %td
+    = f.input :id, as: :hidden
+    = f.input :_destroy, as: :boolean, label: 'Remove', wrapper_html: { class: 'hidden' }
+    = link_to 'Remove', '#', class: 'remove_nested_fields', data: { action: 'nested-fields#remove' }

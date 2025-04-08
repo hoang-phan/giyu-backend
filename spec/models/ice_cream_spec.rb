@@ -4,10 +4,13 @@ RSpec.describe IceCream, type: :model do
   describe 'associations' do
     it { is_expected.to have_many(:ice_cream_flavors).dependent(:destroy) }
     it { is_expected.to have_many(:flavors).through(:ice_cream_flavors) }
+    it { is_expected.to have_many(:ice_cream_toppings).dependent(:destroy) }
+    it { is_expected.to have_many(:toppings).through(:ice_cream_toppings) }
   end
 
   describe 'nested attributes' do
     it { is_expected.to accept_nested_attributes_for(:ice_cream_flavors).allow_destroy(true) }
+    it { is_expected.to accept_nested_attributes_for(:ice_cream_toppings).allow_destroy(true) }
   end
 
   describe '.ransackable_attributes' do
@@ -65,13 +68,17 @@ RSpec.describe IceCream, type: :model do
     context 'when fixed_price is not present' do
       let(:flavor1) { create(:flavor, unit_price: 300) }
       let(:flavor2) { create(:flavor, unit_price: 200) }
+      let(:topping1) { create(:topping, unit_price: 100) }
+      let(:topping2) { create(:topping, unit_price: 50) }
       let(:ice_cream) { create(:ice_cream, fixed_price: nil) }
       let!(:ice_cream_flavor1) { create(:ice_cream_flavor, ice_cream: ice_cream, flavor: flavor1, quantity: 2) }
       let!(:ice_cream_flavor2) { create(:ice_cream_flavor, ice_cream: ice_cream, flavor: flavor2, quantity: 1) }
+      let!(:ice_cream_topping1) { create(:ice_cream_topping, ice_cream: ice_cream, topping: topping1, quantity: 1) }
+      let!(:ice_cream_topping2) { create(:ice_cream_topping, ice_cream: ice_cream, topping: topping2, quantity: 2) }
 
-      it 'calculates price based on flavors and quantities' do
-        # (300 * 2) + (200 * 1) = 800
-        expect(ice_cream.price).to eq(800)
+      it 'calculates price based on flavors, toppings, and quantities' do
+        # (300 * 2) + (200 * 1) + (100 * 1) + (50 * 2) = 1000
+        expect(ice_cream.price).to eq(1000)
       end
     end
   end

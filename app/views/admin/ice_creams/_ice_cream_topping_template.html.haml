@@ -1,0 +1,11 @@
+%tr.nested-fields
+  %td
+    %li.select.input.required
+      = select_tag "ice_cream[ice_cream_toppings_attributes][{INDEX}][topping_id]", options_from_collection_for_select(Topping.all, :id, :name), class: 'select2', include_blank: true
+  %td
+    %li.number.input.optional.numeric.stringish
+      = number_field_tag "ice_cream[ice_cream_toppings_attributes][{INDEX}][quantity]", nil, min: 1, step: 1
+  %td
+    %li.hidden.input.optional
+      = hidden_field_tag "ice_cream[ice_cream_toppings_attributes][{INDEX}][_destroy]", 0
+    = link_to 'Remove', '#', class: 'remove_nested_fields', data: { action: 'nested-fields#remove' }

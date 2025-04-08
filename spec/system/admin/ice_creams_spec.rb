@@ -4,6 +4,8 @@ RSpec.describe 'Ice Creams Admin', type: :system, js: true do
   let!(:admin) { create(:admin_user) }
   let!(:flavor1) { create(:flavor, name: 'Vanilla', unit_price: 599) }
   let!(:flavor2) { create(:flavor, name: 'Chocolate', unit_price: 699) }
+  let!(:topping1) { create(:topping, name: 'Sprinkles', unit_price: 199) }
+  let!(:topping2) { create(:topping, name: 'Whipped Cream', unit_price: 299) }
 
   before do
     driven_by(:selenium_headless)
@@ -55,6 +57,76 @@ RSpec.describe 'Ice Creams Admin', type: :system, js: true do
       
       # Check calculated price (2 * 599 + 1 * 699 = 1897)
       expect(page).to have_content('1 897đ')
+    end
+
+    it 'allows creating a new ice cream with toppings' do
+      visit admin_ice_creams_path
+      click_link 'New Ice Cream'
+      
+      fill_in 'Name', with: 'Topped Ice Cream'
+      
+      # Add first topping
+      click_link 'Add Topping'
+      select 'Sprinkles', from: 'ice_cream[ice_cream_toppings_attributes][0][topping_id]'
+      fill_in 'ice_cream[ice_cream_toppings_attributes][0][quantity]', with: '2'
+      
+      # Add second topping
+      click_link 'Add Topping'
+      select 'Whipped Cream', from: 'ice_cream[ice_cream_toppings_attributes][1][topping_id]'
+      fill_in 'ice_cream[ice_cream_toppings_attributes][1][quantity]', with: '1'
+      
+      click_button 'Save Ice Cream'
+      
+      expect(page).to have_content('Ice cream was successfully created')
+      expect(page).to have_content('Topped Ice Cream')
+      
+      # Check that toppings are displayed
+      within '.panel', text: 'Toppings' do
+        expect(page).to have_content('Sprinkles')
+        expect(page).to have_content('2')
+        expect(page).to have_content('Whipped Cream')
+        expect(page).to have_content('1')
+      end
+      
+      # Check calculated price (2 * 199 + 1 * 299 = 697)
+      expect(page).to have_content('697đ')
+    end
+
+    it 'allows creating a new ice cream with both flavors and toppings' do
+      visit admin_ice_creams_path
+      click_link 'New Ice Cream'
+      
+      fill_in 'Name', with: 'Complete Ice Cream'
+      
+      # Add flavor
+      click_link 'Add Flavor'
+      select 'Vanilla', from: 'ice_cream[ice_cream_flavors_attributes][0][flavor_id]'
+      fill_in 'ice_cream[ice_cream_flavors_attributes][0][quantity]', with: '2'
+      
+      # Add topping
+      click_link 'Add Topping'
+      select 'Sprinkles', from: 'ice_cream[ice_cream_toppings_attributes][0][topping_id]'
+      fill_in 'ice_cream[ice_cream_toppings_attributes][0][quantity]', with: '1'
+      
+      click_button 'Save Ice Cream'
+      
+      expect(page).to have_content('Ice cream was successfully created')
+      expect(page).to have_content('Complete Ice Cream')
+      
+      # Check that flavors are displayed
+      within '.panel', text: 'Flavors' do
+        expect(page).to have_content('Vanilla')
+        expect(page).to have_content('2')
+      end
+      
+      # Check that toppings are displayed
+      within '.panel', text: 'Toppings' do
+        expect(page).to have_content('Sprinkles')
+        expect(page).to have_content('1')
+      end
+      
+      # Check calculated price (2 * 599 + 1 * 199 = 1397)
+      expect(page).to have_content('1 397đ')
     end
 
     it 'allows editing an existing ice cream' do

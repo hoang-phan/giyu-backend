@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_07_121832) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_07_121833) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -55,6 +55,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_07_121832) do
     t.datetime "updated_at", null: false
     t.index ["flavor_id"], name: "index_ice_cream_flavors_on_flavor_id"
     t.index ["ice_cream_id"], name: "index_ice_cream_flavors_on_ice_cream_id"
+  end
+
+  create_table "ice_cream_toppings", force: :cascade do |t|
+    t.bigint "ice_cream_id", null: false
+    t.bigint "topping_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ice_cream_id"], name: "index_ice_cream_toppings_on_ice_cream_id"
+    t.index ["topping_id"], name: "index_ice_cream_toppings_on_topping_id"
   end
 
   create_table "line_items", force: :cascade do |t|
@@ -113,6 +123,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_07_121832) do
 
   add_foreign_key "ice_cream_flavors", "flavors"
   add_foreign_key "ice_cream_flavors", "products", column: "ice_cream_id"
+  add_foreign_key "ice_cream_toppings", "products", column: "ice_cream_id"
+  add_foreign_key "ice_cream_toppings", "toppings"
   add_foreign_key "line_items", "orders"
   add_foreign_key "line_items", "products"
 end

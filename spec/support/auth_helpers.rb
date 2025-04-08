@@ -11,4 +11,4 @@ end
 
 RSpec.configure do |config|
   config.include AuthHelpers, type: :system
-end 
+end

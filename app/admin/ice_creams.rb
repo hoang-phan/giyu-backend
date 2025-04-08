@@ -1,7 +1,7 @@
 ActiveAdmin.register IceCream do
   menu parent: "Products"
 
-  permit_params :name, :fixed_price, ice_cream_flavors_attributes: %i[id flavor_id quantity _destroy]
+  permit_params :name, :fixed_price, ice_cream_flavors_attributes: %i[id flavor_id quantity _destroy], ice_cream_toppings_attributes: %i[id topping_id quantity _destroy]
 
   filter :fixed_price
   filter :created_at
@@ -35,6 +35,13 @@ ActiveAdmin.register IceCream do
     panel "Flavors" do
       table_for ice_cream.ice_cream_flavors do
         column :flavor
+        column :quantity
+      end
+    end
+
+    panel "Toppings" do
+      table_for ice_cream.ice_cream_toppings do
+        column :topping
         column :quantity
       end
     end

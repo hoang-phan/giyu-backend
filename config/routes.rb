@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       resources :flavors
       resources :toppings
       resources :ice_cream_flavors
+      resources :ice_cream_toppings
     end
   end
 end
