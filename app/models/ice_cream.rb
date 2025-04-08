@@ -18,7 +18,7 @@ class IceCream < Product
   end
 
   def to_s
-    name.presence || flavors.map(&:name).uniq.join(' + ')
+    name.presence || flavors.map(&:name).uniq.join(" + ")
   end
   alias to_label to_s
 

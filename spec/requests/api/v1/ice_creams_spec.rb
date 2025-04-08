@@ -1,16 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'Api::V1::IceCreams', type: :request do
-  let(:headers) { { 'Content-Type' => 'application/json' } }
-  let(:json_response) { JSON(response.body) }
-  let(:data_response) { json_response['data'] }
+  include_context 'v1 request context'
 
   describe 'GET /api/v1/ice_creams' do
     let!(:ice_creams) { create_list(:ice_cream, 3) }
-
-    def list_response(key_chain)
-      data_response.map { |item| item.dig(*key_chain) }
-    end
 
     it 'returns a list of ice creams' do
       get '/api/v1/ice_creams', headers: headers
@@ -36,7 +30,7 @@ RSpec.describe 'Api::V1::IceCreams', type: :request do
       it 'returns not found status' do
         get '/api/v1/ice_creams/0', headers: headers
         expect(response).to have_http_status(:not_found)
-        expect(json_response['errors']).to eq(['Record not found'])
+        expect(json_response['errors']).to eq([ 'Record not found' ])
       end
     end
   end
@@ -75,7 +69,7 @@ RSpec.describe 'Api::V1::IceCreams', type: :request do
       it 'returns unprocessable entity status' do
         post '/api/v1/ice_creams', params: invalid_params.to_json, headers: headers
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(json_response['errors']['fixed_price']).to eq(['must be greater than or equal to 0'])
+        expect(json_response['errors']['fixed_price']).to eq([ 'must be greater than or equal to 0' ])
       end
     end
   end
@@ -110,7 +104,7 @@ RSpec.describe 'Api::V1::IceCreams', type: :request do
       it 'returns unprocessable entity status' do
         put "/api/v1/ice_creams/#{ice_cream.id}", params: invalid_update_params.to_json, headers: headers
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(json_response['errors']['fixed_price']).to eq(['must be greater than or equal to 0'])
+        expect(json_response['errors']['fixed_price']).to eq([ 'must be greater than or equal to 0' ])
       end
     end
   end
@@ -126,4 +120,4 @@ RSpec.describe 'Api::V1::IceCreams', type: :request do
       expect(response).to have_http_status(:no_content)
     end
   end
-end 
+end

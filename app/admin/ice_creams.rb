@@ -47,5 +47,5 @@ ActiveAdmin.register IceCream do
     end
   end
 
-  form partial: 'form'
+  form partial: "form"
 end

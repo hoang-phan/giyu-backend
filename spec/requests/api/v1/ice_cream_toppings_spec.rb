@@ -1,16 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'Api::V1::IceCreamToppings', type: :request do
-  let(:headers) { { 'Content-Type' => 'application/json' } }
-  let(:json_response) { JSON(response.body) }
-  let(:data_response) { json_response['data'] }
+  include_context 'v1 request context'
 
   describe 'GET /api/v1/ice_cream_toppings' do
     let!(:ice_cream_toppings) { create_list(:ice_cream_topping, 3) }
-
-    def list_response(key_chain)
-      data_response.map { |item| item.dig(*key_chain) }
-    end
 
     it 'returns a list of ice cream toppings' do
       get '/api/v1/ice_cream_toppings', headers: headers

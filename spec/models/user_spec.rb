@@ -54,4 +54,4 @@ RSpec.describe User, type: :model do
       expect(User.ransackable_associations).to be_empty
     end
   end
-end 
+end

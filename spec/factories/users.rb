@@ -10,4 +10,4 @@ FactoryBot.define do
     registration_date { Date.current }
     last_active_at { Time.current }
   end
-end 
+end

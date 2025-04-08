@@ -3,4 +3,4 @@ FactoryBot.define do
     fixed_price { rand(100..1000) }
     type { 'IceCream' }
   end
-end 
+end

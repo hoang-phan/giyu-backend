@@ -4,4 +4,4 @@ FactoryBot.define do
     association :flavor
     quantity { rand(1..5) }
   end
-end 
+end

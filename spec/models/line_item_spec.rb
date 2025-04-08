@@ -30,7 +30,7 @@ RSpec.describe LineItem, type: :model do
 
   describe '.ransackable_associations' do
     it 'returns the correct ransackable associations' do
-      expected_associations = ['order', 'product']
+      expected_associations = [ 'order', 'product' ]
       expect(LineItem.ransackable_associations).to match_array(expected_associations)
     end
   end
@@ -82,7 +82,7 @@ RSpec.describe LineItem, type: :model do
       it 'calculates amount when quantity changes' do
         line_item.save
         expect(line_item.amount).to eq(1800)
-        
+
         line_item.quantity = 3
         line_item.save
         expect(line_item.amount).to eq(2700)
@@ -91,7 +91,7 @@ RSpec.describe LineItem, type: :model do
       it 'calculates amount when discount_percent changes' do
         line_item.save
         expect(line_item.amount).to eq(1800)
-        
+
         line_item.discount_percent = 20
         line_item.save
         expect(line_item.amount).to eq(1600)
@@ -100,7 +100,7 @@ RSpec.describe LineItem, type: :model do
       it 'calculates amount when product_id changes' do
         line_item.save
         expect(line_item.amount).to eq(1800)
-        
+
         new_product = create(:product, fixed_price: 2000)
         line_item.product = new_product
         line_item.save
@@ -110,10 +110,10 @@ RSpec.describe LineItem, type: :model do
       it 'does not recalculate amount when unrelated attributes change' do
         line_item.save
         original_amount = line_item.amount
-        
+
         line_item.touch
         expect(line_item.amount).to eq(original_amount)
       end
     end
   end
-end 
+end

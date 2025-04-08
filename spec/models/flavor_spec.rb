@@ -6,4 +6,4 @@ RSpec.describe Flavor, type: :model do
   end
 
   it_behaves_like 'priced_item'
-end 
+end

@@ -28,7 +28,7 @@ RSpec.describe Product, type: :model do
 
   describe '.ransackable_associations' do
     it 'returns the correct ransackable associations' do
-      expect(Product.ransackable_associations).to match_array(['line_items'])
+      expect(Product.ransackable_associations).to match_array([ 'line_items' ])
     end
   end
 
@@ -54,4 +54,4 @@ RSpec.describe Product, type: :model do
       end
     end
   end
-end 
+end

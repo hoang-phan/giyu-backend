@@ -25,6 +25,6 @@ class Api::BaseController < InheritedResources::Base
   end
 
   def record_not_found
-    render json: { errors: ['Record not found'] }, status: :not_found
+    render json: { errors: [ "Record not found" ] }, status: :not_found
   end
 end

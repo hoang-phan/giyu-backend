@@ -36,7 +36,7 @@ ActiveAdmin.register Order do
     panel "Line Items" do
       table_for order.line_items do
         column :product do |item|
-          link_to item.product.to_s, [:admin, item.product]
+          link_to item.product.to_s, [ :admin, item.product ]
         end
         column :quantity
         column :discount_percent do |item|

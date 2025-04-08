@@ -74,7 +74,7 @@ RSpec.describe Order, type: :model do
 
   describe '.ransackable_associations' do
     it 'returns the correct ransackable associations' do
-      expect(Order.ransackable_associations).to match_array(['line_items'])
+      expect(Order.ransackable_associations).to match_array([ 'line_items' ])
     end
   end
-end 
+end

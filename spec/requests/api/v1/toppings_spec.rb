@@ -1,16 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'Api::V1::Toppings', type: :request do
-  let(:headers) { { 'Content-Type' => 'application/json' } }
-  let(:json_response) { JSON(response.body) }
-  let(:data_response) { json_response['data'] }
+  include_context 'v1 request context'
 
   describe 'GET /api/v1/toppings' do
     let!(:toppings) { create_list(:topping, 3) }
-
-    def list_response(key_chain)
-      data_response.map { |topping| topping.dig(*key_chain) }
-    end
 
     it 'returns a list of toppings' do
       get '/api/v1/toppings', headers: headers
@@ -38,7 +32,7 @@ RSpec.describe 'Api::V1::Toppings', type: :request do
       it 'returns not found status' do
         get '/api/v1/toppings/0', headers: headers
         expect(response).to have_http_status(:not_found)
-        expect(json_response['errors']).to eq(['Record not found'])
+        expect(json_response['errors']).to eq([ 'Record not found' ])
       end
     end
   end

@@ -17,4 +17,4 @@ RSpec.describe AdminUser, type: :model do
       expect(AdminUser.ransackable_attributes).to match_array(expected_attributes)
     end
   end
-end 
+end

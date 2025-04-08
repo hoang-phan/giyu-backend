@@ -1,16 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'Api::V1::Flavors', type: :request do
-  let(:headers) { { 'Content-Type' => 'application/json' } }
-  let(:json_response) { JSON(response.body) }
-  let(:data_response) { json_response['data'] }
+  include_context 'v1 request context'
 
   describe 'GET /api/v1/flavors' do
     let!(:flavors) { create_list(:flavor, 3) }
-
-    def list_response(key_chain)
-      data_response.map { |flavor| flavor.dig(*key_chain) }
-    end
 
     it 'returns a list of flavors' do
       get '/api/v1/flavors', headers: headers
@@ -38,7 +32,7 @@ RSpec.describe 'Api::V1::Flavors', type: :request do
       it 'returns not found status' do
         get '/api/v1/flavors/0', headers: headers
         expect(response).to have_http_status(:not_found)
-        expect(json_response['errors']).to eq(['Record not found'])
+        expect(json_response['errors']).to eq([ 'Record not found' ])
       end
     end
   end
@@ -134,4 +128,4 @@ RSpec.describe 'Api::V1::Flavors', type: :request do
       expect(response).to have_http_status(:no_content)
     end
   end
-end 
+end
