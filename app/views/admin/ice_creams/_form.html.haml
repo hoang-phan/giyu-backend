@@ -5,34 +5,9 @@
     = f.input :name
     = f.input :fixed_price, input_html: { min: 0, step: 0.01 }
 
-  = f.inputs "Flavors", class: "my-4", data: { controller: 'nested-fields' } do
-    %table.mt-4
-      %thead
-        %tr
-          %th Flavor
-          %th Quantity
-          %th
-      %tbody{ data: { nested_fields_target: 'container' } }
-        = f.semantic_fields_for :ice_cream_flavors do |item|
-          = render 'ice_cream_flavor_fields', f: item
-      %tbody.template{ data: { nested_fields_target: "template" } }
-        = render 'ice_cream_flavor_template'
-    = link_to "Add Flavor", "#", class: "add-nested-field", data: { action: "nested-fields#add" }
+  = render 'nested_items_section', f: f, item_name: "Flavor", association_name: :ice_cream_flavors
+  = render 'nested_items_section', f: f, item_name: "Topping", association_name: :ice_cream_toppings
 
-  = f.inputs "Toppings", class: "my-4", data: { controller: 'nested-fields' } do
-    %table.mt-4
-      %thead
-        %tr
-          %th Topping
-          %th Quantity
-          %th
-      %tbody{ data: { nested_fields_target: 'container' } }
-        = f.semantic_fields_for :ice_cream_toppings do |item|
-          = render 'ice_cream_topping_fields', f: item
-      %tbody.template{ data: { nested_fields_target: "template" } }
-        = render 'ice_cream_topping_template'
-    = link_to "Add Topping", "#", class: "add-nested-field", data: { action: "nested-fields#add" }
-
-    = f.actions do
-      = f.action :submit, label: 'Save Ice Cream'
-      = f.action :cancel, label: 'Cancel'
+  = f.actions do
+    = f.action :submit, label: 'Save Ice Cream'
+    = f.action :cancel, label: 'Cancel'

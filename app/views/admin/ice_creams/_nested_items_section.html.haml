@@ -1,0 +1,13 @@
+= f.inputs item_name.pluralize, class: "my-4", data: { controller: 'nested-fields' } do
+  %table.mt-4
+    %thead
+      %tr
+        %th= item_name
+        %th Quantity
+        %th
+    %tbody{ data: { nested_fields_target: 'container' } }
+      = f.semantic_fields_for association_name do |item|
+        = render "#{association_name.to_s.singularize}_fields", f: item
+    %tbody.template{ data: { nested_fields_target: "template" } }
+      = render "#{association_name.to_s.singularize}_template"
+  = link_to "Add #{item_name}", "#", class: "add-nested-field", data: { action: "nested-fields#add" } 
